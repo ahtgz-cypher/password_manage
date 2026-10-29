@@ -1,0 +1,52 @@
+<div class="entry-card"
+     data-id="{{ entry.id }}"
+     data-category="{{ entry.category }}"
+     data-title="{{ entry.display_title|lower }}"
+     data-subtitle="{{ entry.display_subtitle|lower }}"
+     data-updated="{{ entry.updated_at }}">
+  <div class="card-favicon" style="background: {{ entry.favicon_color }}; color: #fff">
+    {{ entry.favicon_letter }}
+  </div>
+
+  <div class="card-info">
+    <span class="card-title">{{ entry.display_title }}</span>
+    <span class="card-username">{{ entry.display_subtitle }}</span>
+    <span class="card-category">
+      {% if entry.category == 'card' %}Thẻ ngân hàng
+      {% elif entry.category == 'note' %}Ghi chú
+      {% else %}Đăng nhập{% endif %}
+    </span>
+  </div>
+
+  <div class="card-meta">
+    <span class="strength-badge {{ entry.strength }}">{{ entry.strength_label }}</span>
+    <div class="card-actions">
+      {% if not entry.deleted %}
+      <button class="card-action icon-action favorite-btn {{ 'active' if entry.favorite else '' }}"
+              type="button"
+              aria-label="Yêu thích"
+              title="Yêu thích"
+              data-id="{{ entry.id }}">
+        <svg width="14" height="14" viewBox="0 0 18 18"><path d="M9 1.5l2.163 4.38 4.837.703-3.5 3.413.826 4.813L9 12.548l-4.326 2.261.826-4.813L2 6.583l4.837-.703L9 1.5z" fill="currentColor"/></svg>
+      </button>
+      <button class="card-action icon-action card-copy"
+              type="button"
+              aria-label="Sao chép"
+              title="Sao chép dữ liệu chính"
+              data-id="{{ entry.id }}">
+        <svg width="14" height="14" viewBox="0 0 14 14">
+          <rect x="3" y="3" width="8" height="9" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          <path d="M5 3V2a1 1 0 011-1h5a1 1 0 011 1v8a1 1 0 01-1 1h-1" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+      </button>
+      {% endif %}
+
+      {% if entry.deleted %}
+      <button class="card-action restore-btn" type="button" data-id="{{ entry.id }}">Khôi phục</button>
+      <button class="card-action delete-btn danger" type="button" data-id="{{ entry.id }}">Xóa hẳn</button>
+      {% else %}
+      <button class="card-action delete-btn" type="button" data-id="{{ entry.id }}">Xóa</button>
+      {% endif %}
+    </div>
+  </div>
+</div>

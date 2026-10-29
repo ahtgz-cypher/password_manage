@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Cài đặt - VaultX{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="app-shell">
+  {% include 'components/sidebar.html' %}
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Mở menu">
+        <svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="page-heading">
+        <div>
+          <h1>Cài đặt</h1>
+          <p>Quản lý hồ sơ và mật khẩu tài khoản VaultX.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-page">
+      <div class="settings-grid">
+        <form class="tool-card" method="POST" action="/settings">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <input type="hidden" name="action" value="profile" />
+          <h2>Hồ sơ</h2>
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="firstName">Họ</label>
+              <input id="firstName" name="first_name" class="field-input" value="{{ current_user.first_name }}" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="lastName">Tên</label>
+              <input id="lastName" name="last_name" class="field-input" value="{{ current_user.last_name }}" required />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="email">Email</label>
+            <input id="email" name="email" type="email" class="field-input" value="{{ current_user.email }}" required />
+          </div>
+          <button class="btn-primary btn-sm" type="submit">Lưu hồ sơ</button>
+        </form>
+
+        <form class="tool-card" method="POST" action="/settings">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <input type="hidden" name="action" value="password" />
+          <h2>Đổi mật khẩu</h2>
+          <div class="field-group">
+            <label class="field-label" for="currentPassword">Mật khẩu hiện tại</label>
+            <input id="currentPassword" name="current_password" type="password" class="field-input" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="newPassword">Mật khẩu mới</label>
+            <input id="newPassword" name="new_password" type="password" class="field-input" minlength="12" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="confirmPassword">Xác nhận mật khẩu mới</label>
+            <input id="confirmPassword" name="confirm_password" type="password" class="field-input" minlength="12" required />
+          </div>
+          <button class="btn-primary btn-sm" type="submit">Đổi mật khẩu</button>
+        </form>
+
+        <section class="tool-card">
+          <h2>Sao lưu & khôi phục</h2>
+          <p>File export là JSON có dữ liệu đã giải mã để bạn có thể chuyển máy hoặc sao lưu. Hãy giữ file này riêng tư.</p>
+          <a class="btn-outline btn-sm" href="/api/export">Tải file JSON</a>
+          <form class="modal-form" method="POST" action="/api/import" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="field-group">
+              <label class="field-label" for="importFile">Import JSON</label>
+              <input id="importFile" name="import_file" type="file" accept="application/json,.json" class="field-input" required />
+            </div>
+            <button class="btn-primary btn-sm" type="submit">Import vào kho</button>
+          </form>
+        </section>
+
+        <section class="tool-card">
+          <h2>Phiên đăng nhập</h2>
+          <p>Thoát khỏi VaultX trên trình duyệt hiện tại.</p>
+          <form method="POST" action="/logout">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <button class="btn-outline btn-sm" type="submit">Đăng xuất</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

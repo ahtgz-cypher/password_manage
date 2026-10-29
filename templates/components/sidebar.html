@@ -1,0 +1,68 @@
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a class="brand-logo" href="/dashboard">
+      <span class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="currentColor" opacity="0.15"/>
+          <path d="M16 6C12.134 6 9 9.134 9 13v1H7v12h18V14h-2v-1c0-3.866-3.134-7-7-7zm0 2.5c2.485 0 4.5 2.015 4.5 4.5v1h-9v-1c0-2.485 2.015-4.5 4.5-4.5zm0 8.5a2 2 0 110 4 2 2 0 010-4z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="logo-text">VaultX</span>
+    </a>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="/dashboard" class="nav-item {{ 'active' if active_section == 'all' else '' }}" data-tooltip="Tất cả">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 2h6v6H2V2zm8 0h6v6h-6V2zM2 10h6v6H2v-6zm8 0h6v6h-6v-6z" fill="currentColor" opacity=".8"/></svg>
+      <span>Tất cả</span>
+      <span class="nav-count">{{ counts.all }}</span>
+    </a>
+    <a href="/dashboard?cat=favorites" class="nav-item {{ 'active' if active_section == 'favorites' else '' }}" data-tooltip="Yêu thích">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 1.5l2.163 4.38 4.837.703-3.5 3.413.826 4.813L9 12.548l-4.326 2.261.826-4.813L2 6.583l4.837-.703L9 1.5z" fill="currentColor" opacity=".8"/></svg>
+      <span>Yêu thích</span>
+      <span class="nav-count">{{ counts.favorites }}</span>
+    </a>
+    <a href="/dashboard?cat=login" class="nav-item {{ 'active' if active_section == 'login' else '' }}" data-tooltip="Đăng nhập">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2a5 5 0 100 10A5 5 0 009 2zM3.5 13.5C2 14.5 2 16 2 16h14s0-1.5-1.5-2.5S11.5 12 9 12s-4 .5-5.5 1.5z" fill="currentColor" opacity=".8"/></svg>
+      <span>Đăng nhập</span>
+      <span class="nav-count">{{ counts.login }}</span>
+    </a>
+    <a href="/dashboard?cat=card" class="nav-item {{ 'active' if active_section == 'card' else '' }}" data-tooltip="Thẻ ngân hàng">
+      <svg width="18" height="18" viewBox="0 0 18 18"><rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".8"/><path d="M2 7h14" stroke="currentColor" stroke-width="1.5"/><path d="M5 11h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Thẻ ngân hàng</span>
+      <span class="nav-count">{{ counts.card }}</span>
+    </a>
+    <a href="/dashboard?cat=note" class="nav-item {{ 'active' if active_section == 'note' else '' }}" data-tooltip="Ghi chú bảo mật">
+      <svg width="18" height="18" viewBox="0 0 18 18"><rect x="3" y="2" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".8"/><path d="M6 6h6M6 9h6M6 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span>Ghi chú bảo mật</span>
+      <span class="nav-count">{{ counts.note }}</span>
+    </a>
+    <a href="/dashboard?view=trash" class="nav-item {{ 'active' if active_section == 'trash' else '' }}" data-tooltip="Thùng rác">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M6 2h6m-1 0v1H7V2m1 4v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 4h10l-1 10H5L4 4z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span>Thùng rác</span>
+      <span class="nav-count">{{ counts.trash }}</span>
+    </a>
+    <div class="nav-divider"></div>
+    <a href="/generator" class="nav-item {{ 'active' if active_section == 'generator' else '' }}" data-tooltip="Tạo mật khẩu">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 2v14M2 9h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="4" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".5"/></svg>
+      <span>Tạo mật khẩu</span>
+    </a>
+    <a href="/audit" class="nav-item {{ 'active' if active_section == 'audit' else '' }}" data-tooltip="Kiểm tra bảo mật">
+      <svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".8"/><path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Kiểm tra bảo mật</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-card">
+      <div class="user-avatar">{{ current_user.initials if current_user else 'VX' }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ current_user.name if current_user else 'VaultX' }}</span>
+        <span class="user-plan">Free plan</span>
+      </div>
+      <a href="/settings" class="user-settings {{ 'active' if active_section == 'settings' else '' }}" aria-label="Cài đặt" title="Cài đặt">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M6.5 1h3l.5 1.5a5.5 5.5 0 011.2.7L13 2.5l1.5 2.6-1.2 1a5.5 5.5 0 010 1.8l1.2 1L13 11.5l-1.8-.8a5.5 5.5 0 01-1.2.7L9.5 13h-3l-.5-1.6A5.5 5.5 0 014.8 10.7L3 11.5 1.5 8.9l1.2-1a5.5 5.5 0 010-1.8l-1.2-1L3 2.5l1.8.7A5.5 5.5 0 016 2.5L6.5 1zM8 6a2 2 0 100 4 2 2 0 000-4z" fill="currentColor" opacity=".7"/></svg>
+      </a>
+    </div>
+  </div>
+</aside>

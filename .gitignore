@@ -1,0 +1,12 @@
+.vaultx.key
+.flask_secret.key
+vault.db
+vault.db-shm
+vault.db-wal
+__pycache__/
+*.pyc
+*.log
+venv/
+.venv/
+instance/
+.pytest_cache/

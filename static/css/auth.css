@@ -1,0 +1,131 @@
+/* =========================================
+   auth.css — Login & Register pages
+   VaultX Password Manager
+   ========================================= */
+
+/* ---------- Layout ---------- */
+.auth-layout {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 100vh; position: relative; z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .auth-layout { grid-template-columns: 1fr; }
+}
+
+/* ---------- Left panel: branding ---------- */
+.auth-brand {
+  background: linear-gradient(135deg, #0f1119 0%, #141820 100%);
+  border-right: 1px solid var(--border);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Glowing orb behind content */
+.auth-brand::before {
+  content: ''; position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  top: 20%; left: 10%; pointer-events: none;
+}
+.auth-brand::after {
+  content: ''; position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(34,211,165,0.08) 0%, transparent 70%);
+  bottom: 10%; right: 0; pointer-events: none;
+}
+
+.brand-inner {
+  position: relative; z-index: 1;
+  padding: 60px 48px;
+  display: flex; flex-direction: column; gap: 40px;
+}
+
+.brand-headline h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800; line-height: 1.1;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.brand-headline p {
+  margin-top: 16px; color: var(--text-secondary);
+  font-size: 0.95rem; line-height: 1.7;
+}
+
+/* Stats row */
+.brand-stats {
+  display: flex; align-items: center; gap: 0;
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 20px;
+}
+.stat-item { display: flex; flex-direction: column; gap: 2px; flex: 1; text-align: center; }
+.stat-num { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 500; color: var(--accent); }
+.stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-divider { width: 1px; height: 36px; background: var(--border); flex-shrink: 0; margin: 0 8px; }
+
+/* Feature list (register page) */
+.feature-list { display: flex; flex-direction: column; gap: 14px; }
+.feature-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--text-secondary); }
+.feature-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent); box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* Hex grid visual */
+.brand-visual { opacity: 0.6; }
+.hex-grid {
+  display: grid; grid-template-columns: repeat(3, 44px); gap: 6px;
+  justify-content: start;
+}
+.hex {
+  width: 44px; height: 44px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  background: var(--bg-hover); border: none;
+  transition: all 0.4s ease;
+  animation: hexPulse 3s ease-in-out infinite;
+}
+.hex.active {
+  background: var(--accent-dim);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.hex.h2 { animation-delay: 0.3s; }
+.hex.h3 { animation-delay: 0.6s; }
+.hex.h4 { animation-delay: 0.9s; }
+.hex.h5 { animation-delay: 1.2s; }
+.hex.h6 { animation-delay: 1.5s; }
+.hex.h7 { animation-delay: 1.8s; }
+.hex.h8 { animation-delay: 2.1s; }
+.hex.h9 { animation-delay: 2.4s; }
+@keyframes hexPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .auth-brand { display: none; }
+}
+
+/* ---------- Right panel: form ---------- */
+.auth-form-panel {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-base); padding: 40px 24px;
+}
+
+.auth-form-wrap {
+  width: 100%; max-width: 420px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+.form-header h2 {
+  font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.form-header p { margin-top: 6px; color: var(--text-secondary); font-size: 0.88rem; }
+
+.auth-form {
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.auth-switch {
+  text-align: center; font-size: 0.85rem; color: var(--text-secondary);
+}
+.auth-switch a { color: var(--accent); font-weight: 600; }

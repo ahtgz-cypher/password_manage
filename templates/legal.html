@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} - VaultX{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="auth-form-panel" style="min-height:100vh">
+  <div class="auth-form-wrap">
+    <div class="form-header">
+      <h2>{{ page_title }}</h2>
+      {% if page_kind == 'privacy' %}
+      <p>VaultX lưu dữ liệu trong cơ sở dữ liệu cục bộ của dự án. Không có dịch vụ bên thứ ba nào được cấu hình trong bản demo này.</p>
+      {% else %}
+      <p>Đây là bản ứng dụng học tập. Người dùng chịu trách nhiệm bảo vệ máy và cơ sở dữ liệu cục bộ của mình.</p>
+      {% endif %}
+    </div>
+
+    <div class="alert alert-warning">
+      <span>Bản này chưa phải hệ thống production. Không lưu dữ liệu thật nếu chưa bổ sung mã hóa dữ liệu phía server.</span>
+    </div>
+
+    <a class="btn-primary" href="/register">Quay lại đăng ký</a>
+  </div>
+</div>
+{% endblock %}
